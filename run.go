@@ -1,9 +1,16 @@
 package main
 
-import "fmt"
-import "github.com/iamwm/gugugu/utils"
+import (
+	"fmt"
+	"github.com/iamwm/gugugu/blueprints/songs"
+	"github.com/julienschmidt/httprouter"
+	"log"
+	"net/http"
+)
 
 func main() {
 	fmt.Printf("GuGuGu...")
-	echo()
+	router := httprouter.New()
+	songs.ConstructBlueprint(router)
+	log.Fatal(http.ListenAndServe(":8848", router))
 }
